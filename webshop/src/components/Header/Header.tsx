@@ -19,23 +19,25 @@ import { useState, useEffect } from 'react';
 
 const HeaderMegaMenu = () => {
   const [opened, { open, close }] = useDisclosure(false); // Login modal state
-  const [signUpOpened, { open: openSignUp, close: closeSignUp }] = useDisclosure(false); // Sign up modal state
   const [drawerOpened, { toggle: toggleDrawer, close: closeDrawer }] = useDisclosure(false);
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [name, setName] = useState(''); // State for storing name
+  const [setName] = useState(''); // State for storing name
   const [loading, setLoading] = useState(false);
   const [loginError, setLoginError] = useState('');
   const [isLoggedIn, setIsLoggedIn] = useState(false); // State to track if user is logged in
+
+  // Admin account credentials (hardcoded)
+  const adminName = "admin";
+  const adminEmail = "admin@example.com";
+  const adminPassword = "admin123";
 
   // Check if the user is logged in on initial load
   useEffect(() => {
     const storedUserData = localStorage.getItem('user_data');
     if (storedUserData) {
-      const parsedUserData = JSON.parse(storedUserData);
       setIsLoggedIn(true);
-      setName(parsedUserData.name); // Set name from localStorage
     }
   }, []);
 
@@ -58,8 +60,12 @@ const HeaderMegaMenu = () => {
     }, 1000);
   };
 
-  // Check login credentials against localStorage
+  // Check login credentials against admin credentials or localStorage
   const login = (email: string, password: string) => {
+    if (email === adminEmail && password === adminPassword) {
+      return true; // Admin login successful
+    }
+
     const storedUserData = localStorage.getItem('user_data');
     if (!storedUserData) return false;
 
@@ -67,10 +73,10 @@ const HeaderMegaMenu = () => {
     return parsedUserData.email === email && parsedUserData.password === password;
   };
 
-  // Simulate the sign-up process (save to localStorage)
-  const signUp = (name: string, email: string, password: string) => {
-    const userData = { name, email, password };
-    localStorage.setItem('user_data', JSON.stringify(userData));
+  // Log out functionality
+  const handleLogout = () => {
+    setIsLoggedIn(false);
+    localStorage.removeItem('user_data'); // Clear user data from localStorage
   };
 
   return (
@@ -80,12 +86,12 @@ const HeaderMegaMenu = () => {
           <DarkLightMode />
           <Group visibleFrom="sm">
             {isLoggedIn ? (
-              <Text>{`Hello, ${name}`}</Text> // Display logged-in user's name
-            ) : (
               <>
-                <Button onClick={open} variant="default">Log in</Button>
-                <Button onClick={openSignUp}>Sign up</Button>
+                <Text>{`Hello, ${adminName}`}</Text> 
+                <Button onClick={handleLogout} variant="default">Log out</Button> {/* Log out button in header */}
               </>
+            ) : (
+              <Button onClick={open} variant="default">Log in</Button>
             )}
           </Group>
 
@@ -106,12 +112,9 @@ const HeaderMegaMenu = () => {
           <Divider my="sm" />
           <Group justify="center" grow pb="xl" px="md">
             {!isLoggedIn ? (
-              <>
-                <Button onClick={open}>Log in</Button>
-                <Button onClick={openSignUp}>Sign up</Button>
-              </>
+              <Button onClick={open}>Log in</Button>
             ) : (
-              <Button onClick={() => setIsLoggedIn(false)}>Log out</Button>
+              <Button onClick={handleLogout}>Log out</Button>
             )}
           </Group>
           <Group px="md">
@@ -142,44 +145,6 @@ const HeaderMegaMenu = () => {
             <Button type="submit" loading={loading} disabled={loading}>
               Log in
             </Button>
-          </Stack>
-        </form>
-      </Modal>
-
-      {/* Sign up Modal */}
-      <Modal opened={signUpOpened} onClose={closeSignUp} title="Sign up" centered>
-        <form
-          onSubmit={(event) => {
-            event.preventDefault();
-            signUp(name, email, password);
-            alert('Account created');
-            setIsLoggedIn(true); // Update login status after successful sign-up
-            closeSignUp(); // Close the sign-up modal
-          }}
-        >
-          <Stack>
-            <TextInput
-              label="Name"
-              placeholder="Enter your name"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-              required
-            />
-            <TextInput
-              label="Email"
-              placeholder="Enter your email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              required
-            />
-            <PasswordInput
-              label="Password"
-              placeholder="Enter your password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              required
-            />
-            <Button type="submit">Sign up</Button>
           </Stack>
         </form>
       </Modal>
