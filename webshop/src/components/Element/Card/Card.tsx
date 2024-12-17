@@ -1,31 +1,34 @@
 import { Card, Image, Text, Badge, Button, Group } from '@mantine/core';
+import { Product, products } from './../../../data/products'; // Adjust the path if needed
 
-const Products =() => {
+const Products = () => {
     return (
-        <Card shadow="sm" padding="lg" radius="md" withBorder>
-            <Card.Section>
-                <Image
-                    src="https://raw.githubusercontent.com/mantinedev/mantine/master/.demo/images/bg-8.png"
-                    height={160}
-                    alt="Norway"
-                />
-            </Card.Section>
+        <>
+            {products.map((product) => (
+                <Card key={product.id} shadow="sm" padding="lg" radius="md" withBorder>
+                    <Card.Section>
+                        <Image
+                            src="https://raw.githubusercontent.com/mantinedev/mantine/master/.demo/images/bg-8.png"
+                            height={160}
+                            alt={product.name}
+                        />
+                    </Card.Section>
 
-            <Group justify="space-between" mt="md" mb="xs">
-                <Text fw={500}>Norway Fjord Adventures</Text>
-                <Badge color="pink">On Sale</Badge>
-            </Group>
+                    <Group justify="space-between" mt="md" mb="xs">
+                        <Text fw={500}>{product.name}</Text>
+                    </Group>
 
-            <Text size="sm" c="dimmed">
-                With Fjord Tours you can explore more of the magical fjord landscapes with tours and
-                activities on and around the fjords of Norway
-            </Text>
+                    <Text size="sm" c="dimmed">
+                        Price: ${product.price.toFixed(2)}
+                    </Text>
 
-            <Button color="blue" fullWidth mt="md" radius="md">
-                Book classic tour now
-            </Button>
-        </Card>
+                    <Button color="blue" fullWidth mt="md" radius="md">
+                        Add to Cart
+                    </Button>
+                </Card>
+            ))}
+        </>
     );
-}
+};
 
-export { Products }
+export { Products };
