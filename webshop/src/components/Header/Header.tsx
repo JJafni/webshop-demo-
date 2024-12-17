@@ -15,11 +15,9 @@ import { DarkLightMode } from '../Element';
 import classes from './HeaderMegaMenu.module.css';
 
 
-
 const HeaderMegaMenu = () => {
+
   const [drawerOpened, { toggle: toggleDrawer, close: closeDrawer }] = useDisclosure(false);
-
-
 
   return (
     <Box pb={120}>

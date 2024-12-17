@@ -1,17 +1,18 @@
 import '@mantine/core/styles.css';
 import { MantineProvider } from '@mantine/core';
-import { HeaderMegaMenu } from './components';
+import { HeaderMegaMenu, Grid } from './components';
 import './App.css'
 
-function App() {
+const App = () => {
 
   return (
 
     <MantineProvider>
       <HeaderMegaMenu />
+      <Grid />
     </MantineProvider>
 
   )
 }
 
-export default App
+export { App }
