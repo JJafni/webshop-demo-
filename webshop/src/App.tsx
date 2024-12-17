@@ -1,5 +1,5 @@
 import '@mantine/core/styles.css';
-import { MantineProvider } from '@mantine/core';
+import { MantineProvider, Box } from '@mantine/core';
 import { HeaderMegaMenu, Grid } from './components';
 import './App.css'
 
@@ -8,7 +8,9 @@ const App = () => {
   return (
 
     <MantineProvider>
-      <HeaderMegaMenu />
+      <Box style={{position: 'sticky', top: '0', zIndex: '100'}}>
+        <HeaderMegaMenu />
+      </Box>
       <Grid />
     </MantineProvider>
 

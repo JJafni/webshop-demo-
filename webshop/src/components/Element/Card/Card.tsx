@@ -8,8 +8,8 @@ const Products = () => {
                 <Card key={product.id} shadow="sm" padding="lg" radius="md" withBorder>
                     <Card.Section>
                         <Image
-                            src="https://raw.githubusercontent.com/mantinedev/mantine/master/.demo/images/bg-8.png"
-                            height={160}
+                            src={product.image}
+                            height={300}
                             alt={product.name}
                         />
                     </Card.Section>
