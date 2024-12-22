@@ -11,7 +11,6 @@ const App = () => {
       <Box style={{ position: 'sticky', top: '0', zIndex: '100' }}>
         <HeaderMegaMenu />
       </Box>
-      <Grid />
     </MantineProvider>
 
   )

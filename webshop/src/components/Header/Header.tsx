@@ -1,3 +1,4 @@
+import React, { useState, useEffect } from 'react';
 import {
   Box,
   Burger,
@@ -15,7 +16,7 @@ import {
 import { useDisclosure } from '@mantine/hooks';
 import { DarkLightMode } from '../Element';
 import classes from './HeaderMegaMenu.module.css';
-import { useState, useEffect } from 'react';
+import { Grid } from '../Layout/Layout'; // Assuming Layout is in the same directory
 
 const HeaderMegaMenu = () => {
   const [opened, { open, close }] = useDisclosure(false); // Login modal state
@@ -23,15 +24,14 @@ const HeaderMegaMenu = () => {
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [setName] = useState(''); // State for storing name
   const [loading, setLoading] = useState(false);
   const [loginError, setLoginError] = useState('');
   const [isLoggedIn, setIsLoggedIn] = useState(false); // State to track if user is logged in
 
   // Admin account credentials (hardcoded)
-  const adminName = "admin";
-  const adminEmail = "admin@example.com";
-  const adminPassword = "admin123";
+  const adminName = 'admin';
+  const adminEmail = 'admin@example.com';
+  const adminPassword = 'admin123';
 
   // Check if the user is logged in on initial load
   useEffect(() => {
@@ -87,11 +87,19 @@ const HeaderMegaMenu = () => {
           <Group visibleFrom="sm">
             {isLoggedIn ? (
               <>
-                <Text>{`Hello, ${adminName}`}</Text> 
-                <Button onClick={handleLogout} variant="default">Log out</Button> {/* Log out button in header */}
+                <Group>
+                  <Button variant="default">Orders</Button>
+                  <Button variant="default">Products</Button>
+                </Group>
+                <Text>{`Hello, ${adminName}`}</Text>
+                <Button onClick={handleLogout} variant="default">
+                  Log out
+                </Button>
               </>
             ) : (
-              <Button onClick={open} variant="default">Log in</Button>
+              <Button onClick={open} variant="default">
+                Log in
+              </Button>
             )}
           </Group>
 
@@ -148,8 +156,11 @@ const HeaderMegaMenu = () => {
           </Stack>
         </form>
       </Modal>
+
+      {/* Pass the logged-in state and adminName to Layout */}
+      <Grid isLoggedIn={isLoggedIn} adminName={adminName} />
     </Box>
   );
-}
+};
 
 export { HeaderMegaMenu };
