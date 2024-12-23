@@ -1,6 +1,6 @@
 import '@mantine/core/styles.css';
-import { MantineProvider, Box } from '@mantine/core';
-import { HeaderMegaMenu, Grid } from './components';
+import { MantineProvider} from '@mantine/core';
+import { HeaderMegaMenu} from './components';
 import './App.css'
 
 const App = () => {

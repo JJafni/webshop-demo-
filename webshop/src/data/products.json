@@ -1,0 +1,92 @@
+[
+    {
+        "id": "1",
+        "name": "Wireless Mouse",
+        "price": 29.99,
+        "image": "../src/components/assets/image/mouse.jpg"
+    },
+    {
+        "id": "2",
+        "name": "Bluetooth Headphones",
+        "price": 99.99,
+        "image": "../src/components/assets/image/headphone.jpg"
+    },
+    {
+        "id": "3",
+        "name": "4K Smart TV",
+        "price": 499.99,
+        "image": "../src/components/assets/image/tv.png"
+    },
+    {
+        "id": "4",
+        "name": "Gaming Keyboard",
+        "price": 79.99,
+        "image": "../src/components/assets/image/keyboard.jpg"
+    },
+    {
+        "id": "5",
+        "name": "Laptop Stand",
+        "price": 29.99,
+        "image": "../src/components/assets/image/stand.avif"
+    },
+    {
+        "id": "6",
+        "name": "Smartphone Charger",
+        "price": 19.99,
+        "image": "../src/components/assets/image/charger.webp"
+    },
+    {
+        "id": "7",
+        "name": "Portable Power Bank",
+        "price": 39.99,
+        "image": "../src/components/assets/image/powerbank.webp"
+    },
+    {
+        "id": "8",
+        "name": "Smartwatch",
+        "price": 149.99,
+        "image": "../src/components/assets/image/smartwatch.webp"
+    },
+    {
+        "id": "9",
+        "name": "Ergonomic Chair",
+        "price": 199.99,
+        "image": "../src/components/assets/image/chair.jpg"
+    },
+    {
+        "id": "10",
+        "name": "Noise Cancelling Earbuds",
+        "price": 89.99,
+        "image": "../src/components/assets/image/buds.jpg"
+    },
+    {
+        "id": "11",
+        "name": "LED Desk Lamp",
+        "price": 39.99,
+        "image": "../src/components/assets/image/lamp.jpg"
+    },
+    {
+        "id": "12",
+        "name": "External SSD",
+        "price": 129.99,
+        "image": "../src/components/assets/image/ssd.webp"
+    },
+    {
+        "id": "13",
+        "name": "HD Webcam",
+        "price": 69.99,
+        "image": "../src/components/assets/image/cam.jpg"
+    },
+    {
+        "id": "14",
+        "name": "Wireless Keyboard",
+        "price": 49.99,
+        "image": "../src/components/assets/image/keyboard2.jpg"
+    },
+    {
+        "id": "15",
+        "name": "Bluetooth Speaker",
+        "price": 59.99,
+        "image": "../src/components/assets/image/speaker.jpg"
+    }
+]

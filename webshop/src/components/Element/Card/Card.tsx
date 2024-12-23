@@ -2,8 +2,8 @@ import { useState } from 'react';
 import { Card, Image, Text, Button, Group, Drawer, Badge, ActionIcon } from '@mantine/core';
 import { IconX, IconPlus, IconMinus } from '@tabler/icons-react'; // Import icons for "+" and "-"
 import { products } from './../../../data/products'; // Adjust the path if needed
+import product from './../../../data/products.json';
 
-// Add interface for Product type with quantity
 interface Product {
   id: number;
   name: string;
@@ -13,27 +13,23 @@ interface Product {
 }
 
 const Products = () => {
-    const [cart, setCart] = useState<Product[]>([]); // Cart with quantity tracking
+    const [cart, setCart] = useState<Product[]>([]);
     const [drawerOpened, setDrawerOpened] = useState(false);
 
     const addToCart = (product: Omit<Product, 'quantity'>) => {
         setCart((prevCart) => {
             const existingProduct = prevCart.find((item) => item.id === product.id);
             if (existingProduct) {
-                // Increase quantity if the product already exists
                 return prevCart.map((item) =>
                     item.id === product.id ? { ...item, quantity: item.quantity + 1 } : item
                 );
             }
-            // Add new product with quantity = 1
             return [...prevCart, { ...product, quantity: 1 }];
         });
     };
 
     const removeFromCart = (productId: number) => {
-        setCart((prevCart) =>
-            prevCart.filter((item) => item.id !== productId)
-        );
+        setCart((prevCart) => prevCart.filter((item) => item.id !== productId));
     };
 
     const updateQuantity = (productId: number, increment: boolean) => {
@@ -44,8 +40,34 @@ const Products = () => {
                         ? { ...item, quantity: item.quantity + (increment ? 1 : -1) }
                         : item
                 )
-                .filter((item) => item.quantity > 0) // Remove products with quantity <= 0
+                .filter((item) => item.quantity > 0)
         );
+    };
+
+    const placeOrder = () => {
+        if (cart.length === 0) {
+            alert('Your cart is empty!');
+            return;
+        }
+
+        // Store the cart in localStorage
+        const orderData = {
+            cart,
+            total: cart.reduce((sum, item) => sum + item.price * item.quantity, 0).toFixed(2),
+            date: new Date().toISOString(),
+        };
+
+        const orders = JSON.parse(localStorage.getItem('orders') || '[]');
+        orders.push(orderData);
+        localStorage.setItem('orders', JSON.stringify(orders));
+
+        // Clear the cart
+        setCart([]);
+
+        // Close the drawer
+        setDrawerOpened(false);
+
+        alert('Order placed successfully!');
     };
 
     return (
@@ -119,8 +141,8 @@ const Products = () => {
                                 )
                                 .toFixed(2)}
                         </Text>
-                        <Button color="blue" mt="md" fullWidth>
-                            Proceed to Checkout
+                        <Button color="blue" mt="md" fullWidth onClick={placeOrder}>
+                            Place Order
                         </Button>
                     </div>
                 )}
@@ -130,11 +152,7 @@ const Products = () => {
             {products.map((product) => (
                 <Card key={product.id} shadow="sm" padding="lg" radius="md" withBorder>
                     <Card.Section>
-                        <Image
-                            src={product.image}
-                            height={300}
-                            alt={product.name}
-                        />
+                        <Image src={product.image} height={300} alt={product.name} />
                     </Card.Section>
 
                     <Group justify="space-between" mt="md" mb="xs">

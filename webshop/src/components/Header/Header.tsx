@@ -87,10 +87,7 @@ const HeaderMegaMenu = () => {
           <Group visibleFrom="sm">
             {isLoggedIn ? (
               <>
-                <Group>
-                  <Button variant="default">Orders</Button>
-                  <Button variant="default">Products</Button>
-                </Group>
+                
                 <Text>{`Hello, ${adminName}`}</Text>
                 <Button onClick={handleLogout} variant="default">
                   Log out
