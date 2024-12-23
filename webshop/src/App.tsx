@@ -8,9 +8,7 @@ const App = () => {
   return (
 
     <MantineProvider>
-      <Box style={{ position: 'sticky', top: '0', zIndex: '100' }}>
         <HeaderMegaMenu />
-      </Box>
     </MantineProvider>
 
   )
