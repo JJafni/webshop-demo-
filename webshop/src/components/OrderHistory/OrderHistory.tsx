@@ -62,7 +62,7 @@ const OrderHistory = () => {
               ))}
             </div>
 
-            <Text fw={700} align="right">
+            <Text fw={700} ta="right">
               Total: ${order.total}
             </Text>
           </Card>

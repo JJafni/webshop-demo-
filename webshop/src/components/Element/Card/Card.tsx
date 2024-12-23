@@ -2,14 +2,13 @@ import { useState } from 'react';
 import { Card, Image, Text, Button, Group, Drawer, Badge, ActionIcon } from '@mantine/core';
 import { IconX, IconPlus, IconMinus } from '@tabler/icons-react'; // Import icons for "+" and "-"
 import { products } from './../../../data/products'; // Adjust the path if needed
-import product from './../../../data/products.json';
 
 interface Product {
-  id: number;
-  name: string;
-  price: number;
-  image: string;
-  quantity: number; // New field to track quantity
+    id: number;
+    name: string;
+    price: number;
+    image: string;
+    quantity: number; // New field to track quantity
 }
 
 const Products = () => {
